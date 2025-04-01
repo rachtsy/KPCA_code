@@ -104,7 +104,7 @@ class Attention(nn.Module):
             y = y+mu*(k-x-s)
 
         else:
-            attn = (k @ k.transpose(-2, -1)) * self.scale
+            attn = (k @ q.transpose(-2, -1)) * self.scale
             attn = attn.softmax(dim=-1)
         
             attn = self.attn_drop(attn)
