@@ -1,0 +1,5 @@
+fvcore==0.1.5.post20221221
+numpy==1.25.2
+timm==0.9.7
+torch==2.0.1
+torchvision==0.15.2
