@@ -46,3 +46,13 @@ Run with --attack 'fgm' for FGSM attack and adjust --eps for severity of perturb
 ```
 CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 --master_port=$port_num --use_env main.py --model deit_tiny_patch16_224 --batch-size 48 --data-path /path/to/data/imagenet --output_dir /path/to/output/directory/ --project_name 'project_name' --job_name job_name --attack 'pgd' --eps 0.1 --finetune /path/to/trained/model/ --eval 1 --robust --num_iter 2 --layer -1 --lambd 4
 ```
+
+### Reconstruction Error Code (Sec 2.2.1)
+Run script run.py in the Reconstruction folder with wandb to reproduce the plot in Sec 2.2.1 of the paper. \
+The loss is calculated for the same batch of images for each epoch. \
+In the first 5-10 epochs, the loss logged may increase but should decrease afterwards. 
+
+```
+CUDA_VISIBLE_DEVICES='4,5,6,7' python -m torch.distributed.launch --master_port 1 --nproc_per_node=4 --use_env main_train.py --model deit_tiny_patch16_224 --batch-size 256 --data-path /path/to/imagenet/ --output_dir /path/to/output/directory/
+--lr 1e-4 --warmup-epochs 0 
+```
